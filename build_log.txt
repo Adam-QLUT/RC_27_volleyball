@@ -1,0 +1,25 @@
+﻿[  8%] Built target FreeRTOS
+[ 33%] Built target STM32_Drivers
+[ 37%] Built target USB_Device_Library
+[ 38%] Building C object CMakeFiles/RC_27_volleyball.dir/Core/Src/freertos.c.obj
+[ 39%] Linking C executable RC_27_volleyball.elf
+cmake.exe : D:/programming/arm-gnu/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: warning: D
+:\RC_27_volleyball\User\Algorithm\AHRS.lib(ahrs.o) uses 2-byte wchar_t yet the output is to use 4-byte wchar_t; use of 
+wchar_t values across objects may fail
+所在位置 行:1 字符: 37
++ ... olleyball"; & "D:\programming\cmake\bin\cmake.exe" --build build -j12 ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:/programming/...bjects may fail:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+D:/programming/arm-gnu/bin/../lib/gcc/arm-none-eabi/14.2.1/../../../../arm-none-eabi/bin/ld.exe: warning: RC_27_volleyb
+all.elf has a LOAD segment with RWX permissions
+Memory region         Used Size  Region Size  %age Used
+             RAM:       44360 B       128 KB     33.84%
+          RAM_D2:           0 B        32 KB      0.00%
+          RAM_D3:           0 B        16 KB      0.00%
+         ITCMRAM:           0 B        64 KB      0.00%
+           FLASH:       67464 B         1 MB      6.43%
+         DTCMRAM:           0 B       128 KB      0.00%
+Generating .hex and .bin
+[100%] Built target RC_27_volleyball

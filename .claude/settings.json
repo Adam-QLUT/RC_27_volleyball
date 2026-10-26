@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmake --build --help)",
+      "Bash(cmake --help)",
+      "Bash(grep -iB1 -A2 'parallel')",
+      "Bash(getconf _NPROCESSORS_ONLN)",
+      "Bash(sysctl -n hw.ncpu)",
+      "Bash(cmake --build build -j12)",
+      "Read(//tmp/**)"
+    ]
+  }
+}

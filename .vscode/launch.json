@@ -1,0 +1,46 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "STlink",
+      "cwd": "${workspaceRoot}",
+      "executable": "${workspaceRoot}/build/RC_27_volleyball.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "device": "STM32H723VGTx",
+      "svdFile": "${workspaceRoot}/debug/STM32H723.svd",
+      "servertype": "openocd",
+      "configFiles": [
+        "${workspaceRoot}/debug/stlink.cfg",
+        "${workspaceRoot}/debug/stm32h7x.cfg"
+      ],
+      "liveWatch": {
+        "enabled": true,
+        "samplesPerSecond": 4
+      },
+      "runToEntryPoint": "main",
+      "rtos": "FreeRTOS",
+      "preLaunchTask": "build task"
+    },
+    {
+      "name": "DAPlink",
+      "cwd": "${workspaceRoot}",
+      "executable": "${workspaceRoot}/build/RC_27_volleyball.elf",
+      "request": "launch",
+      "type": "cortex-debug",
+      "device": "STM32H723VGTx",
+      "svdFile": "${workspaceRoot}/debug/STM32H723.svd",
+      "servertype": "openocd",
+      "configFiles": [
+        "${workspaceRoot}/debug/openocd_dap.cfg"
+      ],
+      "liveWatch": {
+        "enabled": true,
+        "samplesPerSecond": 4
+      },
+      "runToEntryPoint": "main",
+      "rtos": "FreeRTOS",
+      "preLaunchTask": "build task"
+    }
+  ]
+}
