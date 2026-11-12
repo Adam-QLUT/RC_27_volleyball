@@ -1,7 +1,6 @@
 #ifndef __CHASSIS_OMNI_H__
 #define __CHASSIS_OMNI_H__
 
-#include "robot_param.h"
 
 #include "CAN_receive_send.h"
 
@@ -99,30 +98,33 @@ typedef struct
     pid_t chassis_follow_pid;
     pid_t chassis_power_pid;
 
-    /*-------状态量-------*/
-    //车速
-    float Vx_now;
-    float Vy_now;
-    float W_now;
-    //轮速
-    float speed_now_FL;
-    float speed_now_FR;
-    float speed_now_BL;
-    float speed_now_BR;
-    //角度
-    float chassis_pitch_angle;
-    float chassis_yaw_angle;
-
-    /*-------目标量-------*/
-    //车速
-    float Vx_set;
-    float Vy_set;
-    float W_set;
     //轮速
     float speed_set_FL;
     float speed_set_FR;
     float speed_set_BL;
     float speed_set_BR;
+    float speed_now_FL;
+    float speed_now_FR;
+    float speed_now_BL;
+    float speed_now_BR;
+    //PID反馈轮速（RPM），用于调试对比
+    float speed_pid_fb_FL;
+    float speed_pid_fb_FR;
+    float speed_pid_fb_BL;
+    float speed_pid_fb_BR;
+    //角度
+    float chassis_pitch_angle;
+    float chassis_yaw_angle;
+
+   
+    //车速
+    float Vx_set;
+    float Vy_set;
+    float W_set;
+    float Vx_now;
+    float Vy_now;
+    float W_now;
+    
     //斜坡
     RampGenerator Vx_ramp;
     RampGenerator Vy_ramp;

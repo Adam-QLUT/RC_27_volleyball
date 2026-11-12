@@ -19,17 +19,13 @@
 #include "FSI6X.h"
 #include "VT13.h"
 #include "IMU_updata.h"
-#include "referee_system.h"
 #include "motor.h"
 
 #include "Global_status.h"
-#include "Auto_control.h"
 #include "app_api.h"
 #include "BoardLink.h"
 #include "stp_23.h"
 #include "vofa+.h"
-#include "Vofa_Justfloat_Send.h"
-#include "supercup.h"
 
 // DMA控制变量
 extern DMA_HandleTypeDef hdma_uart5_rx; // 遥控器，仅用接受
@@ -127,17 +123,13 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
   if (Size > UART_BUFFER_SIZE)
     return;
 
-  // 使用 uintptr_t 将指针转换为整数类型，以便在 switch 中使用
-  // huart->Instance 指向触发中断的硬件串口(如 USART1, UART5)
   switch ((uintptr_t)huart->Instance)
   {
   case (uintptr_t)USART1: // 双板普通 UART 通信 / 自瞄数据
   {
     if (!BoardLink_UartRxDispatch(huart, UART1_data.rev_data, Size))
     {
-#if BOARD_GIMBAL
-      App_OnVisionBytes(UART1_data.rev_data, Size);
-#endif
+
     }
 
     // 重新启动DMA接收
@@ -170,8 +162,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
   {
     if (!BoardLink_UartRxDispatch(huart, UART5_data.rev_data, Size))
     {
-      // 与原步兵工程相同：SBUS 帧头优先，其余按 DT7 解包。
-      // 保留最小长度检查，防止不足 18 字节时读取缓冲区旧数据。
+
       if (Size >= 25 && UART5_data.rev_data[0] == 0x0F)
       {
         FSI6X_decode_data(UART5_data.rev_data, &FSI6X_data);
@@ -190,14 +181,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
   case (uintptr_t)UART7: // 导航 / 电管裁判系统
   {
-    if (!BoardLink_UartRxDispatch(huart, UART7_data.rev_data, Size))
-    {
-#if BOARD_GIMBAL
-      App_OnNavigationBytes(UART7_data.rev_data, Size);
-#else
-      fifo_s_puts(&referee_fifo, (char *)UART7_data.rev_data, (int)Size);
-#endif
-    }
+    
 
     // 重新启动DMA接收
     HAL_UARTEx_ReceiveToIdle_DMA(huart, UART7_data.rev_data, UART_BUFFER_SIZE);
@@ -207,7 +191,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
   case (uintptr_t)UART8: // 云台IMU
   {
-    (void)BoardLink_UartRxDispatch(huart, UART8_data.rev_data, Size);
+  
 
     // 重新启动DMA接收
     HAL_UARTEx_ReceiveToIdle_DMA(huart, UART8_data.rev_data, UART_BUFFER_SIZE);
@@ -217,41 +201,12 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size)
 
   case (uintptr_t)USART10: // 图传链路裁判系统 -> STP-23协议
   {
-    if (!BoardLink_UartRxDispatch(huart, UART10_data.rev_data, Size))
-    {
-      if (Size == 21 &&
-          UART10_data.rev_data[0] == 0xA9 && UART10_data.rev_data[1] == 0x53)
-      {
-        VT13_DataSolve(UART10_data.rev_data, &VT13_data);
-      }
-
-#if BOARD_GIMBAL
-      /* STP-23 是字节流协议。
-         DMA接收到的是一串数据（Buffer），长度为 Size。
-         我们需要遍历 Buffer，把每个字节传给状态机处理。
-      */
-      if (!(Size == 21 &&
-            UART10_data.rev_data[0] == 0xA9 && UART10_data.rev_data[1] == 0x53))
-      {
-        for (uint16_t i = 0; i < Size; i++)
-          STP23_ProcessByte(UART10_data.rev_data[i]);
-      }
-#else
-
-#endif
-    }
-
+   
+  }
     // 重新启动DMA接收
     HAL_UARTEx_ReceiveToIdle_DMA(huart, UART10_data.rev_data, UART_BUFFER_SIZE);
     __HAL_DMA_DISABLE_IT(huart->hdmarx, DMA_IT_HT); // 关闭半传输中断
     break;
-  }
-
-  default:
-  {
-    // 可选：处理未知的 huart 实例
-    break;
-  }
   }
 }
 

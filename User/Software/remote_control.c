@@ -98,7 +98,7 @@ void RC_Controller()
     if (RC_data.online >= 0)
         RC_data.online--;
     /*控制模式选择*/
-    if ((RC_data.rc.s[0] == RC_SW_UP && RC_data.rc.s[1] == RC_SW_DOWN) || (RC_data.online <= 0)) // 右上左下，锁死
+    if ((RC_data.rc.s[0] == RC_SW_UP && RC_data.rc.s[1] == RC_SW_DOWN) || (RC_data.online <= 0) || (FSI6X_data.ConnectState != 1))
         Global.Control.mode = LOCK;
     else
         Global.Control.mode = RC;
@@ -106,8 +106,8 @@ void RC_Controller()
         return;
     /*底盘控制：FSI6X 暂不要求拨杆位置，推摇杆即动*/
     
-        Global.Chassis.input.x = (RC_data.rc.ch[1]/ 100.0f);
-        Global.Chassis.input.y= -(RC_data.rc.ch[0]/ 100.0f) ;
+        Global.Chassis.input.x = (RC_data.rc.ch[1]/ 300.0f);
+        Global.Chassis.input.y= -(RC_data.rc.ch[0]/ 300.0f) ;
         Chassis_SetX(Global.Chassis.input.x);
         Chassis_SetY(Global.Chassis.input.y);
     

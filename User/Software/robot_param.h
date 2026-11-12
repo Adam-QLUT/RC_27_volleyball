@@ -24,7 +24,7 @@ extern "C" {
 #define USE_DJIMotor   (1)  /* DJI M2006 / M3508 / GM6020 */
 #define USE_DMMotor    (1)  /* 达妙 MIT 电机 */
 #define USE_DMMotor124 (0)  /* 达妙 1 拖 4 模式 */
-#define USE_LZMotor    (0)  /* 灵足电机 */
+#define USE_LZMotor    (1)  /* 灵足电机 */
 
 /*================================================ 电机类型 ===========================================================*/
 

@@ -13,7 +13,6 @@
 #include "BoardLink.h"
 #include "motor.h"
 #include "dm_imu.h"
-#include "supercup.h"
 
 // CAN寄存器及控制器
 extern FDCAN_HandleTypeDef hfdcan1;
@@ -226,22 +225,13 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
       /* CEL 在读取 ECR 后清零，因此在软件中累加，得到上电以来的协议错误总数。 */
       yaw_debug.can3.error_logging_count += error_counters.ErrorLogging;
     }
-
-    if (BoardLink_RxDispatch(hfdcan, (uint16_t)rx_header.Identifier, rx_data))
-      continue;  // 双板消息处理完后继续取 FIFO 中的下一帧
-    // 超电帧
-    if ((rx_header.Identifier == Supercap_receive_id) ||
-        (rx_header.Identifier == Supercap_chassis_power_id))
-      Supercup_DecodeCandata(hfdcan, rx_data,rx_header.Identifier);
-    //IMU帧
-     if(hfdcan == dm_imu_gimbal.can_handle && rx_header.Identifier == dm_imu_gimbal.mst_id)
-      IMU_UpdateData(rx_data, &dm_imu_gimbal);
     // 电机帧
+    LZMotor_decode_candata(hfdcan, rx_header.Identifier, rx_data);
     DJIMotor_DecodeCandata(hfdcan, rx_header.Identifier, rx_data);
     DMMotor_DecodeCandata(hfdcan, rx_header.Identifier, rx_data);
-    /* DMMotor124_DecodeCandata(hfdcan, rx_header.Identifier, rx_data); */
   }
 }
+
 
 /**
  * @brief CAN错误处理回调函数，重启相关设备

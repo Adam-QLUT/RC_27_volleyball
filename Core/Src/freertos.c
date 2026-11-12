@@ -28,6 +28,7 @@
 #include "stdlib.h"
 #include "iwdg.h"
 #include "Chassis_omni.h"
+#include "Shoot.h"
 #include "FSI6X.h"
 #include "Global_status.h"
 #include "remote_control.h"
@@ -268,7 +269,10 @@ void Motor_control_Task(void *argument)
     {
       DJIMotor_SendCurrent(CAN_20063508_1_4_ID, DJI_CAN_2);
     }
-
+    #if (USE_LZMotor == 1)
+      LZMotor_send_command(LZ_CAN_1_1);
+      LZMotor_send_command(LZ_CAN_1_2);
+#endif
     if (Global.Chassis.input.reset != 1)
       HAL_IWDG_Refresh(&hiwdg1);
     osDelay(1);
@@ -287,6 +291,7 @@ void Shoot_Task(void *argument)
 {
   /* USER CODE BEGIN Shoot_Task */
   (void)argument;
+  Shoot_Init();
   /* Infinite loop */
   for (;;)
   {

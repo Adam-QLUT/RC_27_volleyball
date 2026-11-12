@@ -33,16 +33,8 @@
 /* USER CODE BEGIN Includes */
 #include "UART_data_txrx.h"
 #include "CAN_receive_send.h"
-
 #include "motor.h"
-#include "supercup.h"
-#include "IMU_updata.h"
-#include "dm_imu.h"
 #include "LED.h"
-#include "Power_switch.h"
-#include "referee_system.h"
-
-#include "music.h"
 #include "Chassis_omni.h"
 #include "Global_status.h"
 
@@ -141,7 +133,6 @@ int main(void)
   /*INIT*/
   Uart_Init();
   Can_Init();
-  Refree_system_init();
 
 
   HAL_IWDG_Refresh(&hiwdg1);

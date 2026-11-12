@@ -1,9 +1,4 @@
 #ifndef __DM_MOTOR_DRV_H__
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #define __DM_MOTOR_DRV_H__
 #include "main.h"
 #include "fdcan.h"
@@ -13,15 +8,15 @@ extern "C" {
 #define SPD_MODE			0x200
 #define PSI_MODE		  	0x300
 
-#define KP_MIN 0.0f
-#define KP_MAX 500.0f
-#define KD_MIN 0.0f
-#define KD_MAX 5.0f
-#define P_MAX 12.5664f
-#define V_MAX 30.0f
-#define T_MAX 10.0f
+#define DM_KP_MIN 0.0f
+#define DM_KP_MAX 500.0f
+#define DM_KD_MIN 0.0f
+#define DM_KD_MAX 5.0f
+#define DM_P_MAX 12.56637f
+#define DM_V_MAX 30.0f
+#define DM_T_MAX 10.0f
 
-#define POS_TO_ANGLE  57.6
+#define POS_TO_ANGLE  57.29578f
 
 typedef enum
 {
@@ -163,12 +158,12 @@ typedef struct
     int kd_int;
     float pos;
     float last_pos;
-    float pos_cnt;
+    float pos_cnt;//rad
     float vel;
     float tor;
     float Kp;
     float Kd;
-    float angle_cnt;
+    float angle_cnt;//度
     float angle;
     float Tmos;
     float Tcoil;
@@ -220,9 +215,5 @@ void read_motor_ctrl_fbdata(uint16_t id);
 void write_motor_data(uint16_t id, uint8_t rid, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
 void save_motor_data(uint16_t id, uint8_t rid);
 
-
-#ifdef __cplusplus
-}
-#endif
 #endif /* __DM_MOTOR_DRV_H__ */
 

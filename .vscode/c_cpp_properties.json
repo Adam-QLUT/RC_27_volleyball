@@ -26,8 +26,7 @@
                 "${workspaceFolder}/User/Hardware/IMU",
                 "${workspaceFolder}/User/Hardware/Motor",
                 "${workspaceFolder}/User/Hardware/Remote",
-                "${workspaceFolder}/User/Software",
-                "${workspaceFolder}/User/System"
+                "${workspaceFolder}/User/Software"
             ],
             "defines": [
                 "USE_PWR_LDO_SUPPLY",

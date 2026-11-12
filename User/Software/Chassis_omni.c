@@ -1,10 +1,6 @@
 #include "Chassis_omni.h"
 #include "Global_status.h"
-
-#include "supercup.h"
 #include "Stm32_time.h"
-#include "IMU_updata.h"
-
 #include "User_math.h"
 #include "robot_param.h"
 
@@ -54,15 +50,15 @@ void Chassis_Init()
 
     // PID初始化
     /*PID速度环初始化*/
-    PID_Set(&Chassis.chassis_speed_pid_FL, 25.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
-    PID_Set(&Chassis.chassis_speed_pid_FR, 25.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
-    PID_Set(&Chassis.chassis_speed_pid_BL, 25.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
-    PID_Set(&Chassis.chassis_speed_pid_BR, 25.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_speed_pid_FL, 100.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_speed_pid_FR, 100.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_speed_pid_BL, 100.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_speed_pid_BR, 100.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
     
     /*底盘力控PID*/
-    PID_Set(&Chassis.chassis_T_pid_x, 40.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
-    PID_Set(&Chassis.chassis_T_pid_y, 40.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
-    PID_Set(&Chassis.chassis_T_pid_w, 30.0f, 0.0, 20.0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_T_pid_x, 30.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_T_pid_y, 30.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
+    PID_Set(&Chassis.chassis_T_pid_w, 30.0f, 0.0, 0, 0.0f, CHASSISMOTOR_MAX_CURRENT, 10000);
    
     // 底盘运动斜坡
     RampGenerator_Init(&Chassis.Vx_ramp, CHASSIS_TASK_TIME, 40, 40, 4);
@@ -89,6 +85,11 @@ void Chassis_Updater()
     Chassis.speed_now_FR = CHASSISMotor_get_data(WHEEL_FR).speed_rpm / WHEEL_RATIO * RPM_TO_RAD_S;
     Chassis.speed_now_BL = CHASSISMotor_get_data(WHEEL_BL).speed_rpm / WHEEL_RATIO * RPM_TO_RAD_S;
     Chassis.speed_now_BR = CHASSISMotor_get_data(WHEEL_BR).speed_rpm / WHEEL_RATIO * RPM_TO_RAD_S;
+    // PID反馈轮速(RPM)
+    Chassis.speed_pid_fb_FL = CHASSISMotor_get_data(WHEEL_FL).speed_rpm / WHEEL_RATIO;
+    Chassis.speed_pid_fb_FR = CHASSISMotor_get_data(WHEEL_FR).speed_rpm / WHEEL_RATIO;
+    Chassis.speed_pid_fb_BL = CHASSISMotor_get_data(WHEEL_BL).speed_rpm / WHEEL_RATIO;
+    Chassis.speed_pid_fb_BR = CHASSISMotor_get_data(WHEEL_BR).speed_rpm / WHEEL_RATIO;
     
 
     /*---------------目标量更新----------------*/

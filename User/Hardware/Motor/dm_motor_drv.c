@@ -7,12 +7,12 @@
 
 /**
 ************************************************************************
-* @brief:      	dm4310_enable: 使能 DM4310 电机控制模式
-* @param[in]:   hcan:    指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor:   指向 DM_motor_t 结构体的指针，包含电机状态和控制参数
+* @brief:      	dm4310_enable: 鍚敤DM4310鐢垫満鎺у埗妯″紡鍑芥暟
+* @param[in]:   hcan:    鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor:   鎸囧悜DM_motor_t缁撴瀯鐨勬寚閽堬紝鍖呭惈鐢垫満鐩稿叧淇℃伅鍜屾帶鍒跺弬鏁?
 * @retval:     	void
-* @details:    	根据电机控制模式，通过 CAN 总线发送对应的使能命令。
-*               支持 MIT、位置、速度和位置-速度-电流模式。
+* @details:    	鏍规嵁鐢垫満鎺у埗妯″紡鍚敤鐩稿簲鐨勬ā寮忥紝閫氳繃CAN鎬荤嚎鍙戦€佸惎鐢ㄥ懡浠?
+*               鏀寔鐨勬帶鍒舵ā寮忓寘鎷綅缃ā寮忋€佷綅缃€熷害鎺у埗妯″紡鍜岄€熷害鎺у埗妯″紡
 ************************************************************************
 **/
 void dm_motor_enable(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
@@ -35,12 +35,12 @@ void dm_motor_enable(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
 }
 /**
 ************************************************************************
-* @brief:      	dm4310_disable: 失能 DM4310 电机控制模式
-* @param[in]:   hcan:    指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor:   指向 DM_motor_t 结构体的指针，包含电机状态和控制参数
+* @brief:      	dm4310_disable: 绂佺敤DM4310鐢垫満鎺у埗妯″紡鍑芥暟
+* @param[in]:   hcan:    鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor:   鎸囧悜DM_motor_t缁撴瀯鐨勬寚閽堬紝鍖呭惈鐢垫満鐩稿叧淇℃伅鍜屾帶鍒跺弬鏁?
 * @retval:     	void
-* @details:    	根据电机控制模式，通过 CAN 总线发送对应的失能命令，随后清零控制参数。
-*               支持 MIT、位置、速度和位置-速度-电流模式。
+* @details:    	鏍规嵁鐢垫満鎺у埗妯″紡绂佺敤鐩稿簲鐨勬ā寮忥紝閫氳繃CAN鎬荤嚎鍙戦€佺鐢ㄥ懡浠?
+*               鏀寔鐨勬帶鍒舵ā寮忓寘鎷綅缃ā寮忋€佷綅缃€熷害鎺у埗妯″紡鍜岄€熷害鎺у埗妯″紡
 ************************************************************************
 **/
 void dm_motor_disable(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
@@ -64,12 +64,12 @@ void dm_motor_disable(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
 }
 /**
 ************************************************************************
-* @brief:      	dm4310_ctrl_send: 发送 DM4310 电机控制命令
-* @param[in]:   hcan:    指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor:   指向 DM_motor_t 结构体的指针，包含电机状态和控制参数
+* @brief:      	dm4310_ctrl_send: 鍙戦€丏M4310鐢垫満鎺у埗鍛戒护鍑芥暟
+* @param[in]:   hcan:    鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor:   鎸囧悜DM_motor_t缁撴瀯鐨勬寚閽堬紝鍖呭惈鐢垫満鐩稿叧淇℃伅鍜屾帶鍒跺弬鏁?
 * @retval:     	void
-* @details:    	根据当前控制模式，向 DM4310 发送相应的控制帧。
-*               支持 MIT、位置、速度和位置-速度-电流模式。
+* @details:    	鏍规嵁鐢垫満鎺у埗妯″紡鍙戦€佺浉搴旂殑鍛戒护鍒癉M4310鐢垫満
+*               鏀寔鐨勬帶鍒舵ā寮忓寘鎷綅缃ā寮忋€佷綅缃€熷害鎺у埗妯″紡鍜岄€熷害鎺у埗妯″紡
 ************************************************************************
 **/
 void dm_motor_ctrl_send(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
@@ -93,10 +93,11 @@ void dm_motor_ctrl_send(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
 
 /**
 ************************************************************************
-* @brief:      	dm4310_clear: 清零 DM4310 电机控制参数
-* @param[in]:   motor:   指向 DM_motor_t 结构体的指针
+* @brief:      	dm4310_clear: 娓呴櫎DM4310鐢垫満鎺у埗鍙傛暟鍑芥暟
+* @param[in]:   motor:   鎸囧悜DM_motor_t缁撴瀯鐨勬寚閽堬紝鍖呭惈鐢垫満鐩稿叧淇℃伅鍜屾帶鍒跺弬鏁?
 * @retval:     	void
-* @details:    	将位置、速度、比例增益、微分增益、转矩和电流设定值清零。
+* @details:    	灏咲M4310鐢垫満鐨勫懡浠ゅ弬鏁板拰鎺у埗鍙傛暟娓呴浂锛屽寘鎷綅缃€侀€熷害銆?
+*               姣斾緥澧炵泭(KP)銆佸井鍒嗗鐩?(KD)鍜屾壄鐭?
 ************************************************************************
 **/
 void dm_motor_clear_para(DM_motor_t *motor)
@@ -110,11 +111,11 @@ void dm_motor_clear_para(DM_motor_t *motor)
 }
 /**
 ************************************************************************
-* @brief:      	dm4310_clear_err: 清除 DM4310 电机错误
-* @param[in]:   hcan: 	 指向 CAN 控制结构体的指针
-* @param[in]:  	motor:   指向电机结构体的指针
+* @brief:      	dm4310_clear_err: 娓呴櫎DM4310鐢垫満閿欒鍑芥暟
+* @param[in]:   hcan: 	 鎸囧悜CAN鎺у埗缁撴瀯浣撶殑鎸囬拡
+* @param[in]:  	motor:   鎸囧悜鐢垫満缁撴瀯浣撶殑鎸囬拡
 * @retval:     	void
-* @details:    	根据当前控制模式，发送对应模式的清错命令。
+* @details:    	鏍规嵁鐢垫満鐨勬帶鍒舵ā寮忥紝璋冪敤瀵瑰簲妯″紡鐨勬竻闄ら敊璇嚱鏁?
 ************************************************************************
 **/
 void dm_motor_clear_err(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
@@ -137,12 +138,12 @@ void dm_motor_clear_err(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor)
 }
 /**
 ************************************************************************
-* @brief:      	dm4310_fbdata: 解析 DM4310 电机反馈数据
-* @param[in]:   motor:    指向 DM_motor_t 结构体的指针
-* @param[in]:   rx_data:  指向反馈数据数组的指针
+* @brief:      	dm4310_fbdata: 鑾峰彇DM4310鐢垫満鍙嶉鏁版嵁鍑芥暟
+* @param[in]:   motor:    鎸囧悜DM_motor_t缁撴瀯鐨勬寚閽堬紝鍖呭惈鐢垫満鐩稿叧淇℃伅鍜屽弽棣堟暟鎹?
+* @param[in]:   rx_data:  鎸囧悜鍖呭惈鍙嶉鏁版嵁鐨勬暟缁勬寚閽?
 * @retval:     	void
-* @details:    	解析电机 ID、状态、位置、速度、转矩、MOS 温度和线圈温度，
-*               同时累计圈数并计算相对角度。
+* @details:    	浠庢帴鏀跺埌鐨勬暟鎹腑鎻愬彇DM4310鐢垫満鐨勫弽棣堜俊鎭紝鍖呮嫭鐢垫満ID銆?
+*               鐘舵€併€佷綅缃€侀€熷害銆佹壄鐭╀互鍙婄浉鍏虫俯搴﹀弬鏁?
 ************************************************************************
 **/
 void dm_motor_fbdata(DM_motor_t *motor, uint8_t *rx_data)
@@ -152,7 +153,7 @@ void dm_motor_fbdata(DM_motor_t *motor, uint8_t *rx_data)
 	motor->para.p_int=(rx_data[1]<<8)|rx_data[2];
 	motor->para.v_int=(rx_data[3]<<4)|(rx_data[4]>>4);
 	motor->para.t_int=((rx_data[4]&0xF)<<8)|rx_data[5];
-	motor->para.last_pos = motor->para.pos;
+	motor->para.last_pos = motor->para.pos;  
 	motor->para.pos = uint_to_float(motor->para.p_int, -motor->tmp.PMAX, motor->tmp.PMAX, 16); // (-12.5,12.5)
 	motor->para.vel = uint_to_float(motor->para.v_int, -motor->tmp.VMAX, motor->tmp.VMAX, 12); // (-45.0,45.0)
 	motor->para.tor = uint_to_float(motor->para.t_int, -motor->tmp.TMAX, motor->tmp.TMAX, 12); // (-18.0,18.0)
@@ -160,47 +161,28 @@ void dm_motor_fbdata(DM_motor_t *motor, uint8_t *rx_data)
 	motor->para.Tcoil = (float)(rx_data[7]);
 
 	// process the data
+	// 归一化处理
+	motor->para.pos = normalize_angle(motor->para.pos);
     // count cnt
-    if (motor->para.last_pos > 12 && motor->para.pos < -12)
-        motor->para.pos_cnt += ((P_MAX - motor->para.last_pos) + (motor->para.pos + P_MAX));
-    else if (motor->para.last_pos < -12 && motor->para.pos > 12)
-        motor->para.pos_cnt -= ((P_MAX - motor->para.pos) + motor->para.last_pos + P_MAX);
+    if (motor->para.last_pos > 2 && motor->para.pos < -2)
+        motor->para.pos_cnt += ((PI - motor->para.last_pos) + (motor->para.pos + PI));
+    else if (motor->para.last_pos < -2 && motor->para.pos > 2)
+        motor->para.pos_cnt -= ((PI - motor->para.pos) + motor->para.last_pos + PI);
     else
         motor->para.pos_cnt += (motor->para.pos - motor->para.last_pos);
     // process data
      motor->para.angle_cnt = motor->para.pos_cnt * POS_TO_ANGLE;
     
-        // 计算出轴转速
-        //(ptr)->round_speed = (ptr)->speed_rpm;
-
-    // 计算相对角度 -180~180 谨防精度丢失 总角度过大时
-        float angle = motor->para.angle_cnt - motor->angle_zero;
-        uint32_t mul = abs((int)angle) / 180;
-        if (angle > 180.0f)
-        {
-            if (mul % 2 == 1) // 处于-180度
-                angle -= (mul + 1) * 180;
-            else // 处于180度
-                angle -= mul * 180;
-        }
-        if (angle < -180.0f)
-        {
-            if (mul % 2 == 1) // 处于180度
-                angle += (mul + 1) * 180;
-            else // 处于-180度
-                angle += mul * 180;
-        }
-        motor->para.angle = angle;
 }
 
 /**
 ************************************************************************
-* @brief:      	enable_motor_mode: 使能指定电机模式
-* @param[in]:   hcan:     指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id: 目标电机 ID
-* @param[in]:   mode_id:  要使能的模式 ID
+* @brief:      	enable_motor_mode: 鍚敤鐢垫満妯″紡鍑芥暟
+* @param[in]:   hcan:     鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor_id: 鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   mode_id:  妯″紡ID锛屾寚瀹氳寮€鍚殑妯″紡
 * @retval:     	void
-* @details:    	通过 CAN 总线向目标电机发送模式使能命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠壒瀹氱數鏈哄彂閫佸惎鐢ㄧ壒瀹氭ā寮忕殑鍛戒护
 ************************************************************************
 **/
 void enable_motor_mode(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mode_id)
@@ -221,12 +203,12 @@ void enable_motor_mode(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mo
 }
 /**
 ************************************************************************
-* @brief:      	disable_motor_mode: 失能指定电机模式
-* @param[in]:   hcan:     指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id: 目标电机 ID
-* @param[in]:   mode_id:  要失能的模式 ID
+* @brief:      	disable_motor_mode: 绂佺敤鐢垫満妯″紡鍑芥暟
+* @param[in]:   hcan:     鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor_id: 鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   mode_id:  妯″紡ID锛屾寚瀹氳绂佺敤鐨勬ā寮?
 * @retval:     	void
-* @details:    	通过 CAN 总线向目标电机发送模式失能命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠壒瀹氱數鏈哄彂閫佺鐢ㄧ壒瀹氭ā寮忕殑鍛戒护
 ************************************************************************
 **/
 void disable_motor_mode(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mode_id)
@@ -247,12 +229,12 @@ void disable_motor_mode(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t m
 }
 /**
 ************************************************************************
-* @brief:      	save_pos_zero: 保存当前位置为零点
-* @param[in]:   hcan:     指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id: 目标电机 ID
-* @param[in]:   mode_id:  目标模式 ID
+* @brief:      	save_pos_zero: 淇濆瓨浣嶇疆闆剁偣鍑芥暟
+* @param[in]:   hcan:     鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor_id: 鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   mode_id:  妯″紡ID锛屾寚瀹氳淇濆瓨浣嶇疆闆剁偣鐨勬ā寮?
 * @retval:     	void
-* @details:    	通过 CAN 总线向目标电机发送保存零点命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠壒瀹氱數鏈哄彂閫佷繚瀛樹綅缃浂鐐圭殑鍛戒护
 ************************************************************************
 **/
 void save_pos_zero(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mode_id)
@@ -273,12 +255,12 @@ void save_pos_zero(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mode_i
 }
 /**
 ************************************************************************
-* @brief:      	clear_err: 清除电机错误
-* @param[in]:   hcan:     指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id: 目标电机 ID
-* @param[in]:   mode_id:  目标模式 ID
+* @brief:      	clear_err: 娓呴櫎鐢垫満閿欒鍑芥暟
+* @param[in]:   hcan:     鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽?
+* @param[in]:   motor_id: 鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   mode_id:  妯″紡ID锛屾寚瀹氳娓呴櫎閿欒鐨勬ā寮?
 * @retval:     	void
-* @details:    	通过 CAN 总线向目标电机发送清错命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠壒瀹氱數鏈哄彂閫佹竻闄ら敊璇殑鍛戒护銆?
 ************************************************************************
 **/
 void clear_err(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mode_id)
@@ -299,16 +281,16 @@ void clear_err(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, uint16_t mode_id)
 }
 /**
 ************************************************************************
-* @brief:      	mit_ctrl: MIT 模式电机控制
-* @param[in]:   hcan:			指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id:	目标电机 ID
-* @param[in]:   pos:			位置设定值
-* @param[in]:   vel:			速度设定值
-* @param[in]:   kp:				位置比例系数
-* @param[in]:   kd:				位置微分系数
-* @param[in]:   torq:			转矩设定值
+* @brief:      	mit_ctrl: MIT妯″紡涓嬬殑鐢垫満鎺у埗鍑芥暟
+* @param[in]:   hcan:			鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽堬紝鐢ㄤ簬鎸囧畾CAN鎬荤嚎
+* @param[in]:   motor_id:	鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   pos:			浣嶇疆缁欏畾鍊?
+* @param[in]:   vel:			閫熷害缁欏畾鍊?
+* @param[in]:   kp:				浣嶇疆姣斾緥绯绘暟
+* @param[in]:   kd:				浣嶇疆寰垎绯绘暟
+* @param[in]:   torq:			杞煩缁欏畾鍊?
 * @retval:     	void
-* @details:    	将控制量编码后，通过 CAN 总线发送 MIT 模式控制帧。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠數鏈哄彂閫丮IT妯″紡涓嬬殑鎺у埗甯с€?
 ************************************************************************
 **/
 void mit_ctrl(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor, uint16_t motor_id, float pos, float vel,float kp, float kd, float tor)
@@ -320,8 +302,8 @@ void mit_ctrl(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor, uint16_t motor_id, f
 	pos_tmp = float_to_uint(pos, -motor->tmp.PMAX, motor->tmp.PMAX, 16);
 	vel_tmp = float_to_uint(vel, -motor->tmp.VMAX, motor->tmp.VMAX, 12);
 	tor_tmp = float_to_uint(tor, -motor->tmp.TMAX, motor->tmp.TMAX, 12);
-	kp_tmp  = float_to_uint(kp,  KP_MIN, KP_MAX, 12);
-	kd_tmp  = float_to_uint(kd,  KD_MIN, KD_MAX, 12);
+	kp_tmp  = float_to_uint(kp,  DM_KP_MIN, DM_KP_MAX, 12);
+	kd_tmp  = float_to_uint(kd,  DM_KD_MIN, DM_KD_MAX, 12);
 
 	data[0] = (pos_tmp >> 8);
 	data[1] = pos_tmp;
@@ -336,13 +318,12 @@ void mit_ctrl(FDCAN_HandleTypeDef* hcan, DM_motor_t *motor, uint16_t motor_id, f
 }
 /**
 ************************************************************************
-* @brief:      	pos_ctrl: 位置-速度模式控制
-* @param[in]:   hcan:			指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id:	目标电机 ID
-* @param[in]:   pos:			位置设定值
-* @param[in]:   vel:			速度设定值
+* @brief:      	pos_speed_ctrl: 浣嶇疆閫熷害鎺у埗鍑芥暟
+* @param[in]:   hcan:			鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽堬紝鐢ㄤ簬鎸囧畾CAN鎬荤嚎
+* @param[in]:   motor_id:	鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   vel:			閫熷害缁欏畾鍊?
 * @retval:     	void
-* @details:    	通过 CAN 总线发送位置-速度控制命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠數鏈哄彂閫佷綅缃€熷害鎺у埗鍛戒护
 ************************************************************************
 **/
 void pos_ctrl(FDCAN_HandleTypeDef* hcan,uint16_t motor_id, float pos, float vel)
@@ -369,12 +350,12 @@ void pos_ctrl(FDCAN_HandleTypeDef* hcan,uint16_t motor_id, float pos, float vel)
 }
 /**
 ************************************************************************
-* @brief:      	spd_ctrl: 速度模式控制
-* @param[in]:   hcan: 		指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id: 目标电机 ID
-* @param[in]:   vel: 			速度设定值
+* @brief:      	speed_ctrl: 閫熷害鎺у埗鍑芥暟
+* @param[in]:   hcan: 		鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽堬紝鐢ㄤ簬鎸囧畾CAN鎬荤嚎
+* @param[in]:   motor_id: 鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   vel: 			閫熷害缁欏畾鍊?
 * @retval:     	void
-* @details:    	通过 CAN 总线发送速度控制命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠數鏈哄彂閫侀€熷害鎺у埗鍛戒护
 ************************************************************************
 **/
 void spd_ctrl(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, float vel)
@@ -396,14 +377,14 @@ void spd_ctrl(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, float vel)
 
 /**
 ************************************************************************
-* @brief:      	psi_ctrl: 位置、速度、电流混合控制
-* @param[in]:   hcan:			指向 CAN_HandleTypeDef 结构体的指针
-* @param[in]:   motor_id:	目标电机 ID
-* @param[in]:   pos:			位置设定值
-* @param[in]:   vel:			速度设定值
-* @param[in]:   cur:			电流设定值
+* @brief:      	pos_speed_ctrl: 娣锋帶妯″紡
+* @param[in]:   hcan:			鎸囧悜CAN_HandleTypeDef缁撴瀯鐨勬寚閽堬紝鐢ㄤ簬鎸囧畾CAN鎬荤嚎
+* @param[in]:   motor_id:	鐢垫満ID锛屾寚瀹氱洰鏍囩數鏈?
+* @param[in]:   pos:			浣嶇疆缁欏畾鍊?
+* @param[in]:   vel:			閫熷害缁欏畾鍊?
+* @param[in]:   i:				鐢垫祦缁欏畾鍊?
 * @retval:     	void
-* @details:    	通过 CAN 总线发送位置、速度和电流混合控制命令。
+* @details:    	閫氳繃CAN鎬荤嚎鍚戠數鏈哄彂閫佷綅缃€熷害鎺у埗鍛戒护
 ************************************************************************
 **/
 void psi_ctrl(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, float pos, float vel, float cur)
@@ -435,11 +416,11 @@ void psi_ctrl(FDCAN_HandleTypeDef* hcan, uint16_t motor_id, float pos, float vel
 }
 /**
 ************************************************************************
-* @brief:      	read_motor_data: 读取电机寄存器
-* @param[in]:   id:    电机 CAN ID
-* @param[in]:   rid:   寄存器地址
+* @brief:      	read_motor_data: 鍙戦€佽鍙栧瘎瀛樺櫒鍛戒护
+* @param[in]:   id:    鐢垫満can id
+* @param[in]:   rid:   瀵勫瓨鍣ㄥ湴鍧€
 * @retval:     	void
-* @details:    	发送读取电机寄存器命令。
+* @details:    	璇诲彇鐢垫満鍙傛暟
 ************************************************************************
 **/
 void read_motor_data(uint16_t id, uint8_t rid) 
@@ -452,52 +433,53 @@ void read_motor_data(uint16_t id, uint8_t rid)
 }
 /**
 ************************************************************************
-* @brief:      	read_motor_ctrl_fbdata: 读取电机控制反馈数据
-* @param[in]:   id:    电机 CAN ID
+* @brief:      	read_motor_ctrl_fbdata: 鍙戦€佽鍙栫數鏈哄弽棣堟暟鎹殑鍛戒护
+* @param[in]:   id:    鐢垫満can id
 * @retval:     	void
-* @details:    	发送读取电机控制反馈数据命令。
+* @details:    	璇诲彇鐢垫満鎺у埗鍙嶉鐨勬暟鎹?
 ************************************************************************
 **/
 void read_motor_ctrl_fbdata(uint16_t id) 
 {
-	uint8_t can_id_l = id & 0xFF;       // 低 8 位
-	    uint8_t can_id_h = (id >> 8) & 0x07; // 高 3 位
+	uint8_t can_id_l = id & 0xFF;       // 浣? 8 浣?
+    uint8_t can_id_h = (id >> 8) & 0x07; // 楂? 3 浣?
 
 	uint8_t data[4] = {can_id_l, can_id_h, 0xCC, 0x00};
 	Fdcanx_SendData(&hfdcan1, 0x7FF, data, 4);
 }
 /**
 ************************************************************************
-* @brief:      	write_motor_data: 写入电机寄存器
-* @param[in]:   id:    电机 CAN ID
-* @param[in]:   rid:   寄存器地址
-* @param[in]:   d0-d3: 写入的数据
+* @brief:      	write_motor_data: 鍙戦€佸啓瀵勫瓨鍣ㄥ懡浠?
+* @param[in]:   id:    鐢垫満can id
+* @param[in]:   rid:   瀵勫瓨鍣ㄥ湴鍧€
+* @param[in]:   d0-d3: 鍐欏叆鐨勬暟鎹?
 * @retval:     	void
-* @details:    	发送写入电机寄存器命令。
+* @details:    	鍚戝瘎瀛樺櫒鍐欏叆鏁版嵁
 ************************************************************************
 **/
 void write_motor_data(uint16_t id, uint8_t rid, uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
 {
-	uint8_t can_id_l = id & 0xFF;       // 低 8 位
-	    uint8_t can_id_h = (id >> 8) & 0x07; // 高 3 位
+	uint8_t can_id_l = id & 0xFF;       // 浣? 8 浣?
+    uint8_t can_id_h = (id >> 8) & 0x07; // 楂? 3 浣?
 	
 	uint8_t data[8] = {can_id_l, can_id_h, 0x55, rid, d0, d1, d2, d3};
 	Fdcanx_SendData(&hfdcan1, 0x7FF, data, 8);
 }
 /**
 ************************************************************************
-* @brief:      	save_motor_data: 保存电机参数
-* @param[in]:   id:    电机 CAN ID
-* @param[in]:   rid:   寄存器地址
+* @brief:      	save_motor_data: 鍙戦€佷繚瀛樺懡浠?
+* @param[in]:   id:    鐢垫満can id
+* @param[in]:   rid:   瀵勫瓨鍣ㄥ湴鍧€
 * @retval:     	void
-* @details:    	发送保存电机参数命令。
+* @details:    	淇濆瓨鍐欏叆鐨勭數鏈哄弬鏁?
 ************************************************************************
 **/
 void save_motor_data(uint16_t id, uint8_t rid) 
 {
-	uint8_t can_id_l = id & 0xFF;       // 低 8 位
-	    uint8_t can_id_h = (id >> 8) & 0x07; // 高 3 位
+	uint8_t can_id_l = id & 0xFF;       // 浣? 8 浣?
+    uint8_t can_id_h = (id >> 8) & 0x07; // 楂? 3 浣?
 	
 	uint8_t data[4] = {can_id_l, can_id_h, 0xAA, 0x01};
 	Fdcanx_SendData(&hfdcan1, 0x7FF, data, 4);
 }
+
