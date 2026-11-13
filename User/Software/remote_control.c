@@ -8,6 +8,7 @@
 #include "FSI6X.h"
 #include "Power_switch.h"
 #include "IMU_updata.h"
+#include "Shoot.h"
 
 #include "Stm32_time.h"
 #include "Power_switch.h"
@@ -104,7 +105,15 @@ void RC_Controller()
         Global.Control.mode = RC;
     if (Global.Control.mode != RC)
         return;
-    /*底盘控制：FSI6X 暂不要求拨杆位置，推摇杆即动*/
+
+    /*
+     * CH6 保留原始两档数值：FS_UP=240，FS_DOWN=1807。
+     * 上档对应发射初始角 A，下档对应发射终止角 B。
+     */
+    Global.Shoot.shoot_angle.pitch_angle =
+        (FSI6X_data.CH6 > FS_MID) ? SHOOT_ANGLE_B_RAD : SHOOT_ANGLE_A_RAD;
+
+    /*底盘控制*/
     
         Global.Chassis.input.x = (RC_data.rc.ch[1]/ 300.0f);
         Global.Chassis.input.y= -(RC_data.rc.ch[0]/ 300.0f) ;

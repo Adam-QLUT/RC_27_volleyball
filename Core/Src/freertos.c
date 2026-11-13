@@ -295,6 +295,8 @@ void Shoot_Task(void *argument)
   /* Infinite loop */
   for (;;)
   {
+    /* 1 ms 更新一次发射机构目标角和达妙 MIT 控制帧 */
+    Shoot_Tasks();
     osDelay(1);
   }
   /* USER CODE END Shoot_Task */
